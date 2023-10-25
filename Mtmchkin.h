@@ -10,7 +10,7 @@
 /*
  * GameStatus:
  * MidGame - The game is still active and the player continues to encounter cards.
- * Win - The player reached level 10.
+ * Win - The player reached m_level 10.
  * Loss - The player's HP is 0.
 */
 enum class GameStatus{Win, Loss, MidGame};
@@ -28,8 +28,26 @@ public:
      *      An instance of Mtmchkin
     */
     Mtmchkin(const char* playerName, const Card* cardsArray, int numOfCards);
-
-
+    /*
+     * copy C'tor:
+     * @param other - the object we are copying.
+     * @result
+     *    A new instance of Mtmchkin.
+     */
+    Mtmchkin(const Mtmchkin& other);
+    /*
+     * Assignment operator:
+     * @param other - the object we are copying.
+     * @result
+     *    Referring existing Mtmchkin object to "other" Mtmchkin object.
+     */
+    Mtmchkin &operator=(const Mtmchkin &other);
+    /*
+     * D'tor - deletes memory allocation.
+     * @result
+     *      No memory leaks.
+     */
+    ~Mtmchkin();
     /*
      * Play the next Card - according to the instruction in the exercise document
      *
@@ -57,10 +75,16 @@ public:
      */
     GameStatus getGameStatus() const;
 
-    //TODO: complete the Mtmchkin class.
 
 private:
-    //TODO: complete the Mtmchkin class.
+    Player m_player;
+    Card* m_cardsArray;
+    int m_numOfCards;
+    int m_currentCard;
+    GameStatus m_status;
+
+    static const int DEFAULT_FIRST_CARD = 0;
+    static const int WIN_LEVEL = 10;
 
 };
 
